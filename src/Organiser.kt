@@ -1,6 +1,6 @@
 package blicket
 
-class Event(
+class Organiser(
     val name: String
 ) : JSONRepresentable {
     override fun buildFromJSON(json: JSON) = TODO()

@@ -1,9 +1,9 @@
 package blicket
 
-class Event(
+class User(
     val name: String
 ) : JSONRepresentable {
     override fun buildFromJSON(json: JSON) = TODO()
 
-    override fun createJSONFrom(): JSON = TODO()
+    override fun buildFromJSON(json: JSON) = TODO()
 }
