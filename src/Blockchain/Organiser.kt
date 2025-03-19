@@ -6,4 +6,6 @@ class Organiser(
     override fun buildFromJSON(json: JSON) = TODO()
 
     override fun createJSONFrom(): JSON = TODO()
+
+    override fun toString(): String = "Organiser: $name"
 }
