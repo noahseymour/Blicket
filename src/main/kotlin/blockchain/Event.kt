@@ -18,6 +18,4 @@ class Event(
         tickets.add(ticket)
         return ticket
     }
-
-
 }
