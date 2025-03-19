@@ -1,4 +1,4 @@
-package blicket
+package blockchain
 
 class Organiser(
     val name: String

@@ -1,4 +1,4 @@
-package blicket
+package blockchain
 
 class Verifier(
     val name: String

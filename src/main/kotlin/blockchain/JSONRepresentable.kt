@@ -1,4 +1,4 @@
-package blicket
+package blockchain
 
 interface JSONRepresentable {
     fun buildFromJSON(json: JSON)
