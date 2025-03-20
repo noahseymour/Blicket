@@ -1,11 +1,11 @@
-package blockchain
+package com.blicket.model.blockchain
 
-class User(
+class Organiser(
     val name: String
 ) : JSONRepresentable {
     override fun buildFromJSON(json: JSON) = TODO()
 
     override fun createJSONFrom(): JSON = TODO()
 
-    override fun toString(): String = "User: $name"
+    override fun toString(): String = "Organiser: $name"
 }

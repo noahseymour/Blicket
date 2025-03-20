@@ -1,6 +1,10 @@
 ktor:
+    development: true
     application:
         modules:
-            - com.ApplicationKt.module
+            - com.blicket.ApplicationKt.module
     deployment:
         port: 8080
+        watch:
+            - classes
+            - resources

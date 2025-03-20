@@ -1,4 +1,4 @@
-package blockchain
+package com.blicket.model.blockchain
 
 class Event(
     val name: String

@@ -1,4 +1,4 @@
-package blockchain
+package com.blicket.model.blockchain
 
 class Ledger : JSONRepresentable {
     override fun buildFromJSON(json: JSON) = TODO()

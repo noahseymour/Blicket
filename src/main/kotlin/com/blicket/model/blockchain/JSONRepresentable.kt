@@ -1,4 +1,4 @@
-package blockchain
+package com.blicket.model.blockchain
 
 interface JSONRepresentable {
     fun buildFromJSON(json: JSON)
