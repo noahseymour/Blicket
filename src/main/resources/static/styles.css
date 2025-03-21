@@ -318,3 +318,75 @@ footer {
     padding: 40px 0;
     text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+/* Section Styles for How It Works */
+.how-it-works {
+    padding: 80px 0;
+    background-color: var(--light);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title h2 {
+    font-size: 36px;
+    color: var(--dark);
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.step-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.step-icon {
+    background-color: var(--sleuthe-yellow);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.step-card h3 {
+    font-size: 22px;
+    margin: 20px 0 15px;
+    color: var(--dark);
+}
+
+.step-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .steps {
+        flex-direction: column;
+    }
+}
