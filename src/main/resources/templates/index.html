@@ -2,10 +2,126 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blicket - Blockchain Verified Ticketing</title>
     <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
-    <h2>Blicket</h2>
+<div class="container">
+    <header>
+        <a href="#" class="logo">B<span>licket</span></a>
+        <nav>
+            <ul>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="auth-links">
+            <a href="#">Sign Up</a>
+            <a href="#" class="login">Login</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Future<br>of Ticketing</h1>
+            <p>Need a secure, fraud-proof ticketing system for your events? Here's the revolutionary platform that uses blockchain technology to verify authenticity. Connect, create, and celebrate with complete confidence!</p>
+            <div class="buttons">
+                <a href="#" class="btn btn-primary">Get Started</a>
+                <a href="#" class="btn btn-secondary">How It Works</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-illustration">
+                <!-- CSS-based illustration instead of an image -->
+                <div class="blockchain-circles">
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                    <div class="circle circle-3"></div>
+                </div>
+
+                <!-- SVG Ticket -->
+                <svg class="ticket-svg" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Ticket base -->
+                    <rect x="10" y="20" width="180" height="60" rx="5" fill="#fff" stroke="#222" stroke-width="2"/>
+
+                    <!-- Ticket perforation -->
+                    <line x1="140" y1="20" x2="140" y2="80" stroke="#222" stroke-width="2" stroke-dasharray="5,5"/>
+
+                    <!-- Blockchain verification symbol -->
+                    <circle cx="165" cy="50" r="15" fill="#feb300"/>
+                    <path d="M165 35 L165 65 M155 40 L175 60 M155 60 L175 40" stroke="#222" stroke-width="2"/>
+
+                    <!-- Ticket details -->
+                    <text x="25" y="40" font-family="Arial" font-size="12" fill="#222">EVENT NAME</text>
+                    <text x="25" y="55" font-family="Arial" font-weight="bold" font-size="14" fill="#ff5e6c">BLICKET</text>
+                    <text x="25" y="70" font-family="Arial" font-size="10" fill="#222">Verified by Blockchain</text>
+                </svg>
+
+                <div class="leaves">
+                    <div class="leaf leaf-1"></div>
+                    <div class="leaf leaf-2"></div>
+                    <div class="leaf leaf-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<section class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>Why Choose Blicket?</h2>
+        </div>
+        <div class="feature-cards">
+            <div class="feature-card">
+                <div class="feature-icon feature-icon-1">
+                    <!-- SVG icon for blockchain -->
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L4 6V18L12 22L20 18V6L12 2Z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4 6L12 10L20 6" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 10V22" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>Blockchain Verified</h3>
+                <p>Each ticket is secured with blockchain technology, making counterfeiting impossible and providing complete transparency.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon feature-icon-2">
+                    <!-- SVG icon for transfers -->
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 1L21 5L17 9" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 11V9C3 7.93913 3.42143 6.92172 4.17157 6.17157C4.92172 5.42143 5.93913 5 7 5H21" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 23L3 19L7 15" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 13V15C21 16.0609 20.5786 17.0783 19.8284 17.8284C19.0783 18.5786 18.0609 19 17 19H3" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>Easy Transfers</h3>
+                <p>Transfer tickets securely to friends or sell them on our marketplace without worrying about fraud or duplicate sales.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon feature-icon-3">
+                    <!-- SVG icon for analytics -->
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 20V10" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 20V4" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 20V14" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>Powerful Analytics</h3>
+                <p>Get valuable insights about your attendees and sales with our comprehensive analytics dashboard.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Blicket. All rights reserved.</p>
+    </div>
+</footer>
 </body>
 </html>
