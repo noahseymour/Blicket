@@ -8,7 +8,7 @@ import io.ktor.server.routing.*
 fun Application.configureRouting() {
     routing {
 
-        staticResources("/static", "static")
+        staticResources("/css", "css")
         staticResources("/templates", "templates")
 
 

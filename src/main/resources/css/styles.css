@@ -14,6 +14,10 @@
     font-family: 'Arial', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--ragin-beige);
 }
@@ -99,13 +103,17 @@ nav ul li a:hover {
     overflow: hidden;
 }
 
-.ticket-svg {
+.message-svg {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
     height: auto;
+    border-radius: 16px;
+    padding: 25px;
+    background-color: #fffbf0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 
 .blockchain-circles {
@@ -319,30 +327,9 @@ footer {
     text-align: center;
 }
 
-
-
-
-
-
-
-
-
-
-
-/* Section Styles for How It Works */
 .how-it-works {
     padding: 80px 0;
     background-color: var(--light);
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.section-title h2 {
-    font-size: 36px;
-    color: var(--dark);
 }
 
 .steps {
@@ -389,4 +376,66 @@ footer {
     .steps {
         flex-direction: column;
     }
+}
+
+/* Message bubble style */
+.message-bubble {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    font-size: 14px;
+    max-width: 80%;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.sent {
+    background-color: var(--coral-pink);
+    color: white;
+    margin-left: auto;
+    border-radius: 16px 16px 0 16px;
+    border: none;
+    box-shadow: 0 2px 6px rgba(255,94,108,0.2);
+}
+
+.received {
+    background-color: white;
+    border-radius: 16px 16px 16px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.lock-icon {
+    position: absolute;
+    right: 8px;
+    bottom: 5px;
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+.payment-badge {
+    display: inline-block;
+    background-color: var(--sleuthe-yellow);
+    color: var(--dark);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin-top: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.encryption-line {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 11px;
+    color: #666;
+    font-weight: 500;
+    background-color: rgba(255,251,240,0.8);
+    padding: 4px 0;
+    border-radius: 0 0 16px 16px;
 }

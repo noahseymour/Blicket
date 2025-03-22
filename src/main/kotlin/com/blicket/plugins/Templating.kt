@@ -2,8 +2,8 @@ package com.blicket.plugins
 
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
+import io.ktor.server.routing.routing
 import io.ktor.server.thymeleaf.Thymeleaf
-import io.ktor.server.thymeleaf.ThymeleafContent
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 
 fun Application.configureTemplating() {
@@ -13,5 +13,9 @@ fun Application.configureTemplating() {
             suffix = ".html"
             characterEncoding = "utf-8"
         })
+    }
+
+    routing {
+
     }
 }
