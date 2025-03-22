@@ -1,7 +1,9 @@
 package com.blicket.model.blockchain
 
+import kotlinx.serialization.json.JsonElement
+
 typealias Address = String
-typealias Blockchain = List<String>
+typealias Tick = List<JsonElement>
 typealias Time = String
 typealias JSON = String
 
@@ -14,4 +16,4 @@ val MESSAGE_POSITIONS = 80..<TRANSACTION_LENGTH
 
 val CHECK_STRING_POSITIONS = 0..15
 
-val BASE_URL = "https://rpc.qubic.org"
+const val BASE_URL = "https://rpc.qubic.org"

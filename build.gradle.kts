@@ -42,6 +42,9 @@ dependencies {
     implementation(libs.logback.classic)
     implementation(libs.ktor.server.config.yaml)
 
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-client-cio:$$ktor_version")
+
 
     // KMongo
     implementation("org.litote.kmongo:kmongo:$kmongo_version")
