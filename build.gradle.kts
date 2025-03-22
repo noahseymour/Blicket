@@ -33,7 +33,9 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:0.41.1")
     implementation("org.jetbrains.exposed:exposed-dao:0.41.1")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
-//    implementation("org.postgresql:postgresql:42.3.1")
+    implementation("com.h2database:h2:2.2.224")
+    implementation("org.xerial:sqlite-jdbc:3.40.1.0")
+    implementation("com.zaxxer:HikariCP:5.0.1")
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 }

@@ -1,30 +1,33 @@
 package com.blicket.plugins
 
+import com.blicket.db.Database
+import com.blicket.db.UnauthorisedUserException
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
-import io.ktor.server.auth.UserIdPrincipal
 import io.ktor.server.auth.authenticate
-import io.ktor.server.auth.principal
 import io.ktor.server.http.content.staticResources
+import io.ktor.server.request.receiveParameters
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Application.configureRouting() {
     routing {
+        // Static public resources
+        staticResources("/public", "public")
+        staticResources("/protected", "protected")
 
-        staticResources("/css", "css")
-        staticResources("/templates", "templates")
-        staticResources("/scripts", "scrips")
+        // Root route
+        get("/") {
+            call.respondRedirect("/public/templates/index.html")
+        }
 
-        route("/") {
-            get {
-                call.respondRedirect("templates/index.html")
-            }
+        // Sign-up route (outside authentication)
+        post("/sign-up") {
+            call.respondRedirect("public/templates/login.html")
+        }
 
-            authenticate("auth-form") {
-                post("login") {
-                    call.respondText("Hello, ${call.principal<UserIdPrincipal>()?.name}!")
-                }
-            }
+        post("/login") {
+            call.respondRedirect("/protected/templates/dashboard.html")
         }
     }
 }
