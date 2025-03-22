@@ -1,8 +1,13 @@
+
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val kmongo_version: String by project
 val koin_version: String by project
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -43,7 +48,7 @@ dependencies {
     implementation(libs.ktor.server.config.yaml)
 
     // For Bouncy Castle
-    implementation("org.bouncycastle:bcprov-jdk18on:1.76")
+    implementation("org.bouncycastle:bcprov-jdk18on:1.78")
     implementation("org.bouncycastle:bcpkix-jdk18on:1.76")
 
     implementation("io.ktor:ktor-client-core:$ktor_version")
@@ -51,7 +56,6 @@ dependencies {
 
     //qubic integration
     implementation("at.qubic:qubicj-computor-api:1.5.0")
-
 
     // KMongo
     implementation("org.litote.kmongo:kmongo:$kmongo_version")

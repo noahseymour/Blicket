@@ -11,7 +11,7 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
 import kotlin.random.Random
 
-class Transaction{
+class Transaction {
     private val timestamp: String?
     private val sender: String
     private val recipient: String

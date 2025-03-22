@@ -1,10 +1,16 @@
 package com.blicket.model.blockchain
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider
-import java.security.*
+import java.security.Security
+import java.security.PublicKey
+import java.security.PrivateKey
+import java.security.KeyFactory
+import java.security.KeyPair
+import java.security.KeyPairGenerator
+import java.security.SecureRandom
 import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
-import java.util.*
+import java.util.Base64
 import javax.crypto.Cipher
 
 
@@ -53,6 +59,12 @@ class RSA {
             val keySpec = X509EncodedKeySpec(publicBytes)
             val keyFactory: KeyFactory = KeyFactory.getInstance(RSA_ALGORITHM)
             return keyFactory.generatePublic(keySpec)
+        }
+
+        fun generateKeyPair(keySize: Int = 2048): KeyPair {
+            val keyPairGenerator = KeyPairGenerator.getInstance(RSA_ALGORITHM, PROVIDER)
+            keyPairGenerator.initialize(keySize, SecureRandom())
+            return keyPairGenerator.generateKeyPair()
         }
     }
 }
