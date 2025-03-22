@@ -27,7 +27,6 @@ class Extractor(
         return "{'messages': [$messages]}"
     }
 
-
     private suspend fun getLatestTransactions(): Tick {
         val page: String = makeGetRequest("$BASE_URL/v1/latestTick")
         val latestTick = Json.decodeFromString<Map<String, JsonObject>>(page)["latestTick"]
@@ -38,43 +37,28 @@ class Extractor(
 
     private suspend fun makeGetRequest(url: String): String {
         val client = HttpClient(CIO)
-        return try {
-            val response: HttpResponse = client.get(url)
+        return client.use {
+            val response: HttpResponse = it.get(url)
             response.bodyAsText()
-        } finally {
-            client.close()
         }
     }
-
-
 
     private fun extractMessages(tick: Tick): List<Message> {
         val messages: MutableList<Message> = mutableListOf()
         for (transaction in tick) {
-            val (id, timestamp, sender, signature, message) = Transaction(transaction)
-            if (verifyTransaction(id, timestamp, sender, signature, message)) {
-                val decryptAttempt = decrypt(message)
-                if (verifyDecrypt(decryptAttempt)) {
-                    messages.add(Message(
-                        username,
-                        sender,
-                        timestamp,
-                        decryptAttempt
-                    ))
-                }
+            val (timestamp, sender, message, transactionID) = Transaction(transaction)
+            val decryptAttempt = decrypt(message)
+            if (verifyDecrypt(decryptAttempt)) {
+                messages.add(Message(
+                    username,
+                    sender,
+                    timestamp,
+                    decryptAttempt,
+                    transactionID
+                ))
             }
         }
         return messages.toList()
-    }
-
-    private fun verifyTransaction(
-        id: String,
-        timestamp: String,
-        sender: String,
-        signature: String,
-        message: String
-    ): Boolean {
-        TODO()
     }
 
     private fun decrypt(message: String): String {

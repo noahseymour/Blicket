@@ -1,7 +1,9 @@
 package com.blicket.model.blockchain
 
+import kotlinx.serialization.json.JsonElement
+
 class Transaction(
-    transactionString: String
+    transactionString: JsonElement
 ) {
     private val id: String = transactionString.substring(ID_POSITIONS)
     private val timestamp: String = transactionString.substring(TIMESTAMP_POSITIONS)
