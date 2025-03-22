@@ -1,6 +1,7 @@
 package com.blicket
 
 import com.blicket.plugins.configureAuthentication
+import com.blicket.plugins.configureHttpRedirect
 import com.blicket.plugins.configureRouting
 import com.blicket.plugins.configureTemplating
 import io.ktor.network.tls.certificates.buildKeyStore
@@ -19,6 +20,7 @@ fun Application.module() {
     configureTemplating()
     configureRouting()
     configureAuthentication()
+    configureHttpRedirect()
 }
 
 private fun ApplicationEngine.Configuration.envConfig() {
