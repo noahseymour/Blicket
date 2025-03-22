@@ -5,10 +5,10 @@ import at.qubic.api.domain.QubicHeader
 import at.qubic.api.domain.QubicMessage
 import at.qubic.api.domain.std.SignedTransaction
 import at.qubic.api.service.TransactionService
+import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
-import io.ktor.http.*
 import kotlin.random.Random
 
 class Transaction{

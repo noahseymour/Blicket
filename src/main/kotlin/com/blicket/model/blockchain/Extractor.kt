@@ -1,6 +1,10 @@
 package com.blicket.model.blockchain
 
-import kotlinx.serialization.json.*
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.JsonPrimitive
+
 
 class Extractor(
     private val address: Address,

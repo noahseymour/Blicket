@@ -8,8 +8,6 @@ typealias Time = String
 typealias JSON = String
 typealias Currency = Long
 
-val CHECK_STRING_POSITIONS = 0..15
-
 const val BASE_URL = "https://rpc.qubic.org"
 
 const val RANDOM_SEED_LENGTH = 128;
