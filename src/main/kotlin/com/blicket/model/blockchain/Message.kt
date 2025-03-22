@@ -1,9 +1,12 @@
 package com.blicket.model.blockchain
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Message (
-    private val receiver: Address,
-    private val sender: Address,
-    private val timestamp: Time,
-    private val text: String,
-    private val identifier: String,
+    val receiver: Address,
+    val sender: Address,
+    val timestamp: Time,
+    val text: String,
+    val identifier: String,
 )

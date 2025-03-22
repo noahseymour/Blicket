@@ -14,6 +14,7 @@ import io.ktor.server.response.*
 
 import io.ktor.server.request.*
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 
 class Extractor(
@@ -31,8 +32,8 @@ class Extractor(
         val page: String = makeGetRequest("$BASE_URL/v1/latestTick")
         val latestTick = Json.decodeFromString<Map<String, JsonObject>>(page)["latestTick"]
         val transactionPage = makeGetRequest("$BASE_URL/v2/ticks/$latestTick/transactions")
-        val transactions: JsonObject = Json.decodeFromString<Map<String, JsonObject>>(transactionPage)["transactions"]!!
-        return transactions.toList().map { it.second }
+        val transactionObject = Json.decodeFromString<Map<String, JsonArray>>(transactionPage)
+        return transactionObject["transactions"]!!
     }
 
     private suspend fun makeGetRequest(url: String): String {

@@ -1,23 +1,25 @@
 package com.blicket.model.blockchain
 
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.jsonObject
 
 class Transaction(
-    transactionString: JsonElement
+    private val transactionObject: JsonElement
 ) {
-    private val id: String = transactionString.substring(ID_POSITIONS)
-    private val timestamp: String = transactionString.substring(TIMESTAMP_POSITIONS)
-    private val sender: String = transactionString.substring(SENDER_POSITIONS)
-    private val signature: String = transactionString.substring(SIGNATURE_POSITIONS)
-    private val message: String = transactionString.substring(MESSAGE_POSITIONS)
+    private val timestamp: String = (transactionObject.jsonObject["timestamp"] as JsonPrimitive).content
+    private val sender: String = transactionInfo("sourceId")
+    private val message: String = transactionInfo("inputHex")
+    private val transactionID: String = transactionInfo("txId")
 
-    operator fun component1() = id
+    private fun transactionInfo(key: String) =
+        (transactionObject.jsonObject["transaction"]!!.jsonObject[key] as JsonPrimitive).content
 
-    operator fun component2() = timestamp
+    operator fun component1() = timestamp
 
-    operator fun component3() = sender
+    operator fun component2() = sender
 
-    operator fun component4() = signature
+    operator fun component3() = message
 
-    operator fun component5() = message
+    operator fun component4() = transactionID
 }
