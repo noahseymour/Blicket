@@ -1,21 +1,10 @@
 package com.blicket.model.blockchain
 
-import com.fasterxml.jackson.databind.ser.Serializers.Base
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.http.content.*
-import kotlinx.serialization.json.JsonObject
-import io.ktor.server.routing.*
-import io.ktor.server.response.*
-
-import io.ktor.server.request.*
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.*
 
 class Extractor(
     private val address: Address,
@@ -24,16 +13,19 @@ class Extractor(
 ) {
     suspend fun extractLatest(): String {
         val tick = getLatestTransactions()
-        val messages = extractMessages(tick).joinToString(",") { it.toString() }
-        return "{'messages': [$messages]}"
+        tick?.let {
+            val messages = extractMessages(tick).joinToString(",") { it.toJSONString() }
+            return "{'status':'success','messages': [$messages]}"
+        }
+        return "{'status':'empty'}"
     }
 
-    private suspend fun getLatestTransactions(): Tick {
+    private suspend fun getLatestTransactions(): Tick? {
         val page: String = makeGetRequest("$BASE_URL/v1/latestTick")
         val latestTick = Json.decodeFromString<Map<String, JsonObject>>(page)["latestTick"]
         val transactionPage = makeGetRequest("$BASE_URL/v2/ticks/$latestTick/transactions")
         val transactionObject = Json.decodeFromString<Map<String, JsonArray>>(transactionPage)
-        return transactionObject["transactions"]!!
+        return transactionObject["transactions"]?.filter { (it.jsonObject["destId"] as JsonPrimitive).content == address } as JsonArray?
     }
 
     private suspend fun makeGetRequest(url: String): String {
@@ -48,16 +40,14 @@ class Extractor(
         val messages: MutableList<Message> = mutableListOf()
         for (transaction in tick) {
             val (timestamp, sender, message, transactionID) = Transaction(transaction)
-            val decryptAttempt = decrypt(message)
-            if (verifyDecrypt(decryptAttempt)) {
-                messages.add(Message(
-                    username,
-                    sender,
-                    timestamp,
-                    decryptAttempt,
-                    transactionID
-                ))
-            }
+            val decryptedMessage = decrypt(message)
+            messages.add(Message(
+                username,
+                sender,
+                timestamp,
+                decryptedMessage,
+                transactionID
+            ))
         }
         return messages.toList()
     }
