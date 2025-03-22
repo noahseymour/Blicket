@@ -1,15 +1,11 @@
 package com.blicket.model.blockchain
 
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.*
 
 
 class Extractor(
-    private val address: Address,
+    private val receiverAddress: Address,
     private val privateKey: String,
-    private val username: String
 ) {
     suspend fun extractLatest(): String {
         val tick = getLatestTransactions()
@@ -23,7 +19,10 @@ class Extractor(
     private suspend fun getLatestTransactions(): Tick? {
         val transactionPage = makeGetRequest("$BASE_URL/v2/ticks/${latestTick()}/transactions")
         val transactionObject = Json.decodeFromString<Map<String, JsonArray>>(transactionPage)
-        return transactionObject["transactions"]?.filter { (it.jsonObject["destId"] as JsonPrimitive).content == address } as JsonArray?
+
+        val transactions: List<JsonObject>? = transactionObject["transactions"]?.mapNotNull { it.jsonObject["transaction"]?.jsonObject }
+        val destIds: List<JsonPrimitive?>? =  transactions?.map { it["destId"]?.jsonPrimitive }
+        return destIds?.filterNotNull()?.filter { it.content == receiverAddress }
     }
 
     private fun extractMessages(tick: Tick): List<Message> {
@@ -38,15 +37,13 @@ class Extractor(
              * in this case they never will be.
              */
             messages.add(Message(
-                username,
-                sender,
-                timestamp,
-                decryptedMessage,
-                transactionID
+                receiver = receiverAddress,
+                sender = sender,
+                timestamp = timestamp,
+                text = decryptedMessage,
+                identifier = transactionID
             ))
         }
         return messages.toList()
     }
-
-    override fun toString(): String = "Extractor object for $username"
 }

@@ -11,7 +11,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 suspend fun latestTick(): String {
     val page: String = makeGetRequest("$BASE_URL/v1/latestTick")
-    return Json.decodeFromString<Map<String, JsonObject>>(page)["latestTick"].toString() //TODO POTENTIAL ERROR POINT
+    return Json.decodeFromString<Map<String, JsonPrimitive>>(page)["latestTick"].toString()
 }
 
 suspend fun makeGetRequest(url: String): String {

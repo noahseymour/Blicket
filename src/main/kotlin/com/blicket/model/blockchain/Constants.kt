@@ -1,9 +1,9 @@
 package com.blicket.model.blockchain
 
-import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
 
 typealias Address = String
-typealias Tick = JsonArray
+typealias Tick = List<JsonElement>
 typealias Time = String
 typealias JSON = String
 typealias Currency = Long
