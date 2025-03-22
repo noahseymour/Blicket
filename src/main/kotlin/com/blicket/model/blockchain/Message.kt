@@ -1,6 +1,7 @@
 package com.blicket.model.blockchain
 
 import kotlinx.serialization.Serializable
+import org.bson.codecs.pojo.annotations.BsonId
 
 @Serializable
 data class Message (
@@ -8,5 +9,6 @@ data class Message (
     val sender: Address,
     val timestamp: Time,
     val text: String,
+    @BsonId
     val identifier: String,
 )
