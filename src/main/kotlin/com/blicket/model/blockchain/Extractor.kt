@@ -6,8 +6,12 @@ class Extractor(
     private val username: String
 ) {
     fun extract(blockchain: Blockchain): String {
-        val messages = extractMessages(blockchain).joinToString(",") { it.asJSON() }
+        val messages = extractMessages(blockchain).joinToString(",") { it.toString() }
         return "{'messages': [$messages]}"
+    }
+
+    private fun getLatestTick() {
+        "$BASE_URL/latestTick"
     }
 
     private fun extractMessages(blockchain: Blockchain): List<Message> {
@@ -20,6 +24,7 @@ class Extractor(
                     messages.add(Message(
                         username,
                         sender,
+                        timestamp,
                         decryptAttempt
                     ))
                 }
@@ -39,7 +44,7 @@ class Extractor(
     }
 
     private fun decrypt(message: String): String {
-
+        TODO()
     }
 
     private fun verifyDecrypt(attempt: String): Boolean =
