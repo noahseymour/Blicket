@@ -1,8 +1,10 @@
 package com.blicket
 
 import com.blicket.plugins.configureAuthentication
+import com.blicket.plugins.configureDatabases
 import com.blicket.plugins.configureHttpRedirect
 import com.blicket.plugins.configureRouting
+import com.blicket.plugins.configureSerialization
 import com.blicket.plugins.configureTemplating
 import io.ktor.server.application.*
 import io.ktor.server.netty.EngineMain
@@ -16,5 +18,7 @@ fun Application.module() {
     configureTemplating()
     configureAuthentication()
     configureHttpRedirect()
+    configureSerialization()
+    configureDatabases()
     configureRouting()
 }
