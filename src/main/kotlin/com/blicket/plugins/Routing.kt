@@ -10,7 +10,7 @@ fun Application.configureRouting() {
 
         staticResources("/css", "css")
         staticResources("/templates", "templates")
-
+        staticResources("/scripts", "scrips")
 
         get("/") {
             call.respondRedirect("templates/index.html")
