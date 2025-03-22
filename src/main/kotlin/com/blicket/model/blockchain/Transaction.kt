@@ -12,13 +12,13 @@ import kotlinx.serialization.json.jsonObject
 import kotlin.random.Random
 
 class Transaction{
-
     private val timestamp: String?
     private val sender: String
     private val recipient: String
     private val message: String
     private val transactionID: String?
 
+    //Constructor for transaction to process
     constructor(transactionObject: JsonElement) {
         val transactionInfo = { key: String ->
             (transactionObject.jsonObject["transaction"]!!.jsonObject[key] as JsonPrimitive).content
@@ -31,25 +31,26 @@ class Transaction{
         transactionID = transactionInfo("txId")
     }
 
+    //Constructor for transaction to broadcast
     constructor(
         sender: String,
         recipient: String,
         message: String,
     ) {
-        this.timestamp = null //TODO
+        this.timestamp = null
         this.sender = sender
         this.recipient = recipient
         this.message = message
-        this.transactionID = null //TODO
+        this.transactionID = null
     }
 
-    operator fun component1() = timestamp
+    operator fun component1() = timestamp ?: throw UnsupportedOperationException("No timestamp specified")
 
     operator fun component2() = sender
 
     operator fun component3() = message
 
-    operator fun component4() = transactionID
+    operator fun component4() = transactionID ?: throw UnsupportedOperationException("No identifier specified")
 
     suspend fun broadcast(): String {
         require(timestamp == null)
@@ -76,11 +77,12 @@ class Transaction{
             .size(TRANSACTION_HEADER_SIZE)
             .build()
 
+        val encryptedMessage = RSA.encryptToBase64(message, recipient)
         val qubicMessage: QubicMessage = QubicMessage.builder()
             .header(qubicHeader)
-            .payload(message.toByteArray() + rawTransaction) // TODO SHADY AS FUCK
+            .payload(encryptedMessage.toByteArray() + rawTransaction) // TODO SHADY AS FUCK
             .build()
 
-        return qubicMessage.toBytes() //TODO ENCRYPT MESSAGE
+        return qubicMessage.toBytes()
     }
 }

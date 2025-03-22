@@ -8,8 +8,8 @@ typealias Time = String
 typealias JSON = String
 typealias Currency = Long
 
-const val BASE_URL = "https://rpc.qubic.org"
+const val BASE_URL = "https://testnet-rpc.qubic.org"
 
-const val RANDOM_SEED_LENGTH = 128;
+const val RANDOM_SEED_LENGTH = 128
 
-const val TRANSACTION_HEADER_SIZE = 152;
+const val TRANSACTION_HEADER_SIZE = 152

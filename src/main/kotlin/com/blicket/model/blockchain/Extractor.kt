@@ -8,7 +8,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 class Extractor(
     private val address: Address,
-    private val privateKey: Int,
+    private val privateKey: String,
     private val username: String
 ) {
     suspend fun extractLatest(): String {
@@ -30,7 +30,7 @@ class Extractor(
         val messages: MutableList<Message> = mutableListOf()
         for (transaction in tick) {
             val (timestamp, sender, message, transactionID) = Transaction(transaction)
-            val decryptedMessage = decrypt(message)
+            val decryptedMessage = RSA.decryptFromBase64(message, privateKey)
             /**
              * Transaction objects are input from the blockchain (tick-chain)
              * These will always contain full metadata, without omissions,
@@ -40,16 +40,12 @@ class Extractor(
             messages.add(Message(
                 username,
                 sender,
-                timestamp!!,
+                timestamp,
                 decryptedMessage,
-                transactionID!!
+                transactionID
             ))
         }
         return messages.toList()
-    }
-
-    private fun decrypt(message: String): String {
-        TODO()
     }
 
     override fun toString(): String = "Extractor object for $username"
