@@ -3,31 +3,11 @@ package com.blicket.model.blockchain
 class Transaction(
     transactionString: String
 ) {
-    private lateinit var id: String
-    private lateinit var timestamp: String
-    private lateinit var sender: String
-    private lateinit var signature: String
-    private lateinit var message: String
-
-    init {
-        val offsets = listOf(
-            ID_LENGTH,
-            TIMESTAMP_LENGTH,
-            SENDER_LENGTH,
-            SIGNATURE_LENGTH,
-            MESSAGE_LENGTH
-        )
-        require(offsets.sum() == transactionString.length)
-
-        val values: MutableList<String> = mutableListOf()
-        var position = 0
-        for (offset in offsets) {
-            values.add(transactionString.slice(position..position + offset))
-            position += offset
-        }
-
-        val (id, timestamp, sender, signature, message) = values
-    }
+    private val id: String = transactionString.substring(ID_POSITIONS)
+    private val timestamp: String = transactionString.substring(TIMESTAMP_POSITIONS)
+    private val sender: String = transactionString.substring(SENDER_POSITIONS)
+    private val signature: String = transactionString.substring(SIGNATURE_POSITIONS)
+    private val message: String = transactionString.substring(MESSAGE_POSITIONS)
 
     operator fun component1() = id
 

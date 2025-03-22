@@ -1,13 +1,15 @@
 package com.blicket.model.blockchain
 
-typealias Address = Int
+typealias Address = String
 typealias Blockchain = List<String>
 typealias Time = Int
+typealias JSON = String
 
-const val ID_LENGTH = 16
-const val TIMESTAMP_LENGTH = 16
-const val SENDER_LENGTH = 16
-const val SIGNATURE_LENGTH = 32
-const val MESSAGE_LENGTH = 256
+const val TRANSACTION_LENGTH = 1024
+val ID_POSITIONS = 0..15
+val TIMESTAMP_POSITIONS = 16..31
+val SENDER_POSITIONS = 32..63
+val SIGNATURE_POSITIONS = 64..79
+val MESSAGE_POSITIONS = 80..<TRANSACTION_LENGTH
 
-
+val CHECK_STRING_POSITIONS = 0..15

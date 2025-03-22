@@ -5,16 +5,45 @@ class Extractor(
     private val privateKey: Int,
     private val username: String
 ) {
-    fun extractMessages(blockchain: Blockchain) {
-        for (transaction in blockchain) {
-            val (id, timestamp, sender, signature, message) = parseTransaction(transaction)
-            if (verifyTransaction(id, timestamp, sender, signature, message)) {}
-        }
+    fun extract(blockchain: Blockchain): String {
+        val messages = extractMessages(blockchain).joinToString(",") { it.asJSON() }
+        return "{'messages': [$messages]}"
     }
 
-    private fun parseTransaction(transaction: String): Transaction = TODO()
+    private fun extractMessages(blockchain: Blockchain): List<Message> {
+        val messages: MutableList<Message> = mutableListOf()
+        for (transaction in blockchain) {
+            val (id, timestamp, sender, signature, message) = Transaction(transaction)
+            if (verifyTransaction(id, timestamp, sender, signature, message)) {
+                val decryptAttempt = decrypt(message)
+                if (verifyDecrypt(decryptAttempt)) {
+                    messages.add(Message(
+                        username,
+                        sender,
+                        decryptAttempt
+                    ))
+                }
+            }
+        }
+        return messages.toList()
+    }
 
-    private fun verifyTransaction(id: String, timestamp: String, sender: String, signature: String, message: String): Boolean = TODO()
+    private fun verifyTransaction(
+        id: String,
+        timestamp: String,
+        sender: String,
+        signature: String,
+        message: String
+    ): Boolean {
+        TODO()
+    }
+
+    private fun decrypt(message: String): String {
+
+    }
+
+    private fun verifyDecrypt(attempt: String): Boolean =
+        (attempt.substring(CHECK_STRING_POSITIONS) == address)
 
     override fun toString(): String = "Extractor object for $username"
 }
