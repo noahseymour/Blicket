@@ -1,19 +1,47 @@
 package com.blicket.model.blockchain
 
+import at.qubic.api.domain.MessageType
+import at.qubic.api.domain.QubicHeader
+import at.qubic.api.domain.QubicMessage
+import at.qubic.api.domain.std.SignedTransaction
+import at.qubic.api.service.TransactionService
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
+import io.ktor.http.*
+import kotlin.random.Random
 
-class Transaction(
-    private val transactionObject: JsonElement
-) {
-    private val timestamp: String = (transactionObject.jsonObject["timestamp"] as JsonPrimitive).content
-    private val sender: String = transactionInfo("sourceId")
-    private val message: String = transactionInfo("inputHex")
-    private val transactionID: String = transactionInfo("txId")
+class Transaction{
 
-    private fun transactionInfo(key: String) =
-        (transactionObject.jsonObject["transaction"]!!.jsonObject[key] as JsonPrimitive).content
+    private val timestamp: String?
+    private val sender: String
+    private val recipient: String
+    private val message: String
+    private val transactionID: String?
+
+    constructor(transactionObject: JsonElement) {
+        val transactionInfo = { key: String ->
+            (transactionObject.jsonObject["transaction"]!!.jsonObject[key] as JsonPrimitive).content
+        }
+
+        timestamp = (transactionObject.jsonObject["timestamp"] as JsonPrimitive).content
+        sender = transactionInfo("sourceId")
+        recipient = transactionInfo("destId")
+        message = transactionInfo("inputHex")
+        transactionID = transactionInfo("txId")
+    }
+
+    constructor(
+        sender: String,
+        recipient: String,
+        message: String,
+    ) {
+        this.timestamp = null //TODO
+        this.sender = sender
+        this.recipient = recipient
+        this.message = message
+        this.transactionID = null //TODO
+    }
 
     operator fun component1() = timestamp
 
@@ -22,4 +50,37 @@ class Transaction(
     operator fun component3() = message
 
     operator fun component4() = transactionID
+
+    suspend fun broadcast(): String {
+        require(timestamp == null)
+        val result = makePostRequest("$BASE_URL/v1/broadcast-transaction", generateEncodedTransaction())
+        return if (result.status == HttpStatusCode.OK) "SUCCESS" else result.toString()
+    }
+
+    private suspend fun generateEncodedTransaction(amount: Currency = 0): ByteArray {
+        val transactionService = TransactionService()
+
+        val transaction: SignedTransaction = transactionService.createTransactionWithNonceK(
+            Integer.parseInt(latestTick()) + 5,
+            Random.nextBytes(RANDOM_SEED_LENGTH),
+            sender,
+            recipient,
+            amount
+        )
+
+        val rawTransaction: ByteArray = transaction.toBytes()
+
+        val qubicHeader: QubicHeader = QubicHeader.builder()
+            .type(MessageType.BROADCAST_TRANSACTION)
+            .dejavu(0)
+            .size(TRANSACTION_HEADER_SIZE)
+            .build()
+
+        val qubicMessage: QubicMessage = QubicMessage.builder()
+            .header(qubicHeader)
+            .payload(message.toByteArray() + rawTransaction) // TODO SHADY AS FUCK
+            .build()
+
+        return qubicMessage.toBytes() //TODO ENCRYPT MESSAGE
+    }
 }

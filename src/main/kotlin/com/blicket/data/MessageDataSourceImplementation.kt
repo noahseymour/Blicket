@@ -9,9 +9,12 @@ class MessageDataSourceImplementation(
 
     private val messages = db.getCollection<Message>()
 
-    override suspend fun getAllMessagesStored(): List<Message> = messages.find().descendingSort(Message::timestamp).toList()
+    override suspend fun getAllMessagesStored(): List<Message> = messages
+            .find()
+            .descendingSort(Message::timestamp)
+            .toList()
 
     override suspend fun insertMessage(message: Message) {
-        TODO("Not yet implemented")
+        messages.insertOne(message)
     }
 }

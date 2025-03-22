@@ -45,6 +45,9 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("io.ktor:ktor-client-cio:$$ktor_version")
 
+    //qubic integration
+    implementation("at.qubic:qubicj-computor-api:1.5.0")
+
 
     // KMongo
     implementation("org.litote.kmongo:kmongo:$kmongo_version")
