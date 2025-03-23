@@ -10,7 +10,7 @@ import kotlinx.serialization.json.jsonPrimitive
 
 class Extractor(
     private val receiverAddress: Address,
-    private val privateKey: String,
+    private val privateKey: ByteArray,
 ) {
     suspend fun extractLatest(): String {
         val tick = getLatestTransactions()
@@ -34,7 +34,7 @@ class Extractor(
         val messages: MutableList<Message> = mutableListOf()
         for (transaction in tick) {
             val (timestamp, sender, message, transactionID) = Transaction(transaction)
-            val decryptedMessage = RSA.decryptFromBase64(message, privateKey)
+            val decryptedMessage = FourQCrypto.decrypt(message.toByteArray(), FourQPrivateKey(privateKey))
             /**
              * Transaction objects are input from the blockchain (tick-chain)
              * These will always contain full metadata, without omissions,
@@ -45,7 +45,7 @@ class Extractor(
                 receiver = receiverAddress,
                 sender = sender,
                 timestamp = timestamp,
-                text = decryptedMessage,
+                text = decryptedMessage.toString(),
                 identifier = transactionID
             ))
         }

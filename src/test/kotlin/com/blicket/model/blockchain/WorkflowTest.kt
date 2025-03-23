@@ -6,17 +6,21 @@ import org.junit.Test
 class WorkflowTest {
     @Test
     fun testSendAndReadMessage() {
-        val senderPair = RSA.generateKeyPair()
-        val receiverPair = RSA.generateKeyPair()
+        val senderPair = generateKeyPair()
+        val receiverPair = generateKeyPair()
 
-        val senderTransaction = Transaction(
-            sender = senderPair.second.toString(Charsets.UTF_8),     //TODO maybe problems with toString()
-            recipient = receiverPair.second.toString(Charsets.UTF_8),
-            "Hello World"
+        val senderIdentity = getIdentityFromPublicKey(senderPair.second, false)
+        val recipientIdentity = getIdentityFromPublicKey(receiverPair.second, false)
+
+        val senderTransaction = TransactionPost(
+            sender = senderPair.second,
+            recipient = receiverPair.second,
+            message = "Hello World"
         )
+
         val receiverExtractor = Extractor(
-            receiverAddress = receiverPair.second.toString(),
-            privateKey = receiverPair.first.toString()
+            receiverAddress = recipientIdentity,
+            privateKey = receiverPair.first
         )
 
         runBlocking {

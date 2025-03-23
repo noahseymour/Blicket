@@ -1,30 +1,21 @@
 package com.blicket.model.blockchain
 
-import at.qubic.api.domain.MessageType
-import at.qubic.api.domain.QubicHeader
-import at.qubic.api.domain.QubicMessage
-import at.qubic.api.domain.std.SignedTransaction
-import at.qubic.api.service.TransactionService
-import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
-import kotlin.random.Random
 
-class Transaction {
-    private val timestamp: String?
+class Transaction(private val transactionObject: JsonElement) {
+    private val timestamp: String
     private val sender: String
     private val recipient: String
     private val message: String
-    private val transactionID: String?
+    private val transactionID: String
     private val paymentAmount: Currency
 
-    //Constructor for transaction to process
-    constructor(transactionObject: JsonElement) {
+    init {
         val transactionInfo = { key: String ->
             (transactionObject.jsonObject["transaction"]!!.jsonObject[key] as JsonPrimitive).content
         }
-
         timestamp = (transactionObject.jsonObject["timestamp"] as JsonPrimitive).content
         sender = transactionInfo("sourceId")
         recipient = transactionInfo("destId")
@@ -33,60 +24,11 @@ class Transaction {
         paymentAmount = 0
     }
 
-    //Constructor for transaction to broadcast
-    constructor(
-        sender: String,
-        recipient: String,
-        message: String,
-        paymentAmount: Currency = 0
-    ) {
-        this.timestamp = null
-        this.sender = sender
-        this.recipient = recipient
-        this.message = message
-        this.transactionID = null
-        this.paymentAmount = paymentAmount
-    }
-
-    operator fun component1() = timestamp ?: throw UnsupportedOperationException("No timestamp specified")
+    operator fun component1() = timestamp
 
     operator fun component2() = sender
 
     operator fun component3() = message
 
-    operator fun component4() = transactionID ?: throw UnsupportedOperationException("No identifier specified")
-
-    suspend fun broadcast(): String {
-        require(timestamp == null)
-        val result = makePostRequest("$BASE_URL/v1/broadcast-transaction", generateEncodedTransaction())
-        return if (result.status == HttpStatusCode.OK) "SUCCESS" else result.toString()
-    }
-
-    private suspend fun generateEncodedTransaction(): ByteArray {
-        val transactionService = TransactionService()
-
-        val transaction: SignedTransaction = transactionService.createTransactionWithNonceK(
-            Integer.parseInt(latestTick()) + 5,
-            Random.nextBytes(RANDOM_SEED_LENGTH),
-            sender,
-            recipient,
-            paymentAmount
-        )
-
-        val rawTransaction: ByteArray = transaction.toBytes()
-
-        val qubicHeader: QubicHeader = QubicHeader.builder()
-            .type(MessageType.BROADCAST_TRANSACTION)
-            .dejavu(0)
-            .size(TRANSACTION_HEADER_SIZE)
-            .build()
-
-        val encryptedMessage = RSA.encryptToBase64(message, recipient)
-        val qubicMessage: QubicMessage = QubicMessage.builder()
-            .header(qubicHeader)
-            .payload(encryptedMessage.toByteArray() + rawTransaction) // TODO SHADY AS FUCK
-            .build()
-
-        return qubicMessage.toBytes()
-    }
+    operator fun component4() = transactionID
 }

@@ -13,3 +13,9 @@ const val BASE_URL = "https://testnet-rpc.qubic.org"
 const val RANDOM_SEED_LENGTH = 64
 
 const val TRANSACTION_HEADER_SIZE = 152
+
+const val TICK_OFFSET = 15
+
+fun getSeed(): String {
+    return "wqbdupxgcaimwdsnchitjmsplzclkqokhadgehdxqogeeiovzvadstt";
+}
