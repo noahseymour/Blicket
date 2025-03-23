@@ -17,6 +17,7 @@ class Transaction {
     private val recipient: String
     private val message: String
     private val transactionID: String?
+    private val paymentAmount: Currency
 
     //Constructor for transaction to process
     constructor(transactionObject: JsonElement) {
@@ -29,6 +30,7 @@ class Transaction {
         recipient = transactionInfo("destId")
         message = transactionInfo("inputHex")
         transactionID = transactionInfo("txId")
+        paymentAmount = 0
     }
 
     //Constructor for transaction to broadcast
@@ -36,12 +38,14 @@ class Transaction {
         sender: String,
         recipient: String,
         message: String,
+        paymentAmount: Currency = 0
     ) {
         this.timestamp = null
         this.sender = sender
         this.recipient = recipient
         this.message = message
         this.transactionID = null
+        this.paymentAmount = paymentAmount
     }
 
     operator fun component1() = timestamp ?: throw UnsupportedOperationException("No timestamp specified")
@@ -58,7 +62,7 @@ class Transaction {
         return if (result.status == HttpStatusCode.OK) "SUCCESS" else result.toString()
     }
 
-    private suspend fun generateEncodedTransaction(amount: Currency = 0): ByteArray {
+    private suspend fun generateEncodedTransaction(): ByteArray {
         val transactionService = TransactionService()
 
         val transaction: SignedTransaction = transactionService.createTransactionWithNonceK(
@@ -66,7 +70,7 @@ class Transaction {
             Random.nextBytes(RANDOM_SEED_LENGTH),
             sender,
             recipient,
-            amount
+            paymentAmount
         )
 
         val rawTransaction: ByteArray = transaction.toBytes()

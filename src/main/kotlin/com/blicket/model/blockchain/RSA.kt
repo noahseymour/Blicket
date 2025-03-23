@@ -1,5 +1,6 @@
 package com.blicket.model.blockchain
 
+import at.qubic.api.crypto.IdentityUtil
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 import java.security.Security
 import java.security.PublicKey
@@ -12,7 +13,7 @@ import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 import java.util.Base64
 import javax.crypto.Cipher
-import at.qubic.api.crypto.IdentityUtil
+import at.qubic.api.crypto.IdentityUtil.*
 
 
 class RSA {
@@ -62,14 +63,15 @@ class RSA {
             return keyFactory.generatePublic(keySpec)
         }
 
-        fun generateKeyPair(keySize: Int = 480): Pair<ByteArray, ByteArray> {
-//            val keyPairGenerator = KeyPairGenerator.getInstance(RSA_ALGORITHM, PROVIDER)
-//            keyPairGenerator.initialize(keySize, SecureRandom())
-//            return keyPairGenerator.generateKeyPair()
-            val identityUtil: IdentityUtil = IdentityUtil();
-            val privateKey = identityUtil.getPrivateKeyFromSubSeed(identityUtil.getSubSeedFromSeed("wqbdupxgcaimwdsnchitjmsplzclkqokhadgehdxqogeeiovzvadstt"))
+        fun generateKeyPair(): Pair<ByteArray, ByteArray> {
+            val identityUtil: IdentityUtil = IdentityUtil()
+            val seed = "wqbdupxgcaimwdsnchitjmsplzclkqokhadgehdxqogeeiovzvadstt"
+            val subSeed = identityUtil.getSubSeedFromSeed(seed)
+            val privateKey = identityUtil.getPrivateKeyFromSubSeed(subSeed)
             val publicKey = identityUtil.getPublicKeyFromPrivateKey(privateKey)
-            return (privateKey to publicKey)
+            println(publicKey.size)
+            println(privateKey.size)
+            return Pair(publicKey, privateKey)
         }
     }
 }
