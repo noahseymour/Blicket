@@ -1,5 +1,6 @@
 package com.blicket.model.blockchain
 
+import junit.framework.TestCase.assertNotNull
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
@@ -24,7 +25,7 @@ class WorkflowTest {
         )
 
         runBlocking {
-            println(senderTransaction.broadcast())
+            assertNotNull(senderTransaction.broadcast())
             println(receiverExtractor.extractLatest())
         }
     }
