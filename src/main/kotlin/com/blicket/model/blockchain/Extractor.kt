@@ -1,11 +1,7 @@
 package com.blicket.model.blockchain
 
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.*
+import java.lang.Exception
 
 
 class Extractor(
@@ -22,12 +18,16 @@ class Extractor(
     }
 
     private suspend fun getLatestTransactions(): Tick? {
-        val transactionPage = makeGetRequest("$BASE_URL/v2/ticks/${latestTick()}/transactions")
-        val transactionObject = Json.decodeFromString<Map<String, JsonArray>>(transactionPage)
-
-        val transactions: List<JsonObject>? = transactionObject["transactions"]?.mapNotNull { it.jsonObject["transaction"]?.jsonObject }
-        val destIds: List<JsonPrimitive?>? =  transactions?.map { it["destId"]?.jsonPrimitive }
-        return destIds?.filterNotNull()?.filter { it.content == receiverAddress }
+        val transactionPage = makeGetRequest("$BASE_URL/v2/ticks/${latestTick().toInt() - 5}/transactions")
+        try {
+            val transactionObject = Json.decodeFromString<Map<String, JsonArray>>(transactionPage)
+            val transactions: List<JsonObject>? = transactionObject["transactions"]?.mapNotNull { it.jsonObject["transaction"]?.jsonObject }
+            val destIds: List<JsonPrimitive?>? = transactions?.map { it["destId"]?.jsonPrimitive }
+            return destIds?.filterNotNull()?.filter { it.content == receiverAddress }
+        } catch (_: Exception) {
+            print(Json.decodeFromString<Map<String, JsonElement>>(transactionPage))
+        }
+        return null
     }
 
     private fun extractMessages(tick: Tick): List<Message> {
@@ -48,7 +48,7 @@ class Extractor(
                 text = decryptedMessage.toString(),
                 identifier = transactionID,
                 amount = paymentAmount.toLong()
-            ))
+                ))
         }
         return messages.toList()
     }

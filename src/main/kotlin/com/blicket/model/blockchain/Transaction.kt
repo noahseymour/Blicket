@@ -15,7 +15,7 @@ class Transaction(
     private val paymentAmount: String
 
     init {
-        val transactionInfo = { key: String ->
+        val transactionInfo: (String) -> String = { key: String ->
             (transactionObject.jsonObject["transaction"]!!.jsonObject[key] as JsonPrimitive).content
         }
         timestamp = (transactionObject.jsonObject["timestamp"] as JsonPrimitive).content
