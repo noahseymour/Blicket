@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blicket - Public Key Login</title>
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="index.html" class="logo">B<span>licket</span></a>
+    <nav>
+      <ul>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="#">Security</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </nav>
+    <div class="auth-links">
+      <a href="sign-up.html" class="signup">Sign Up</a>
+    </div>
+  </header>
+
+  <section class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <h2>Access Your Account</h2>
+        <p>Login with your Qubic public key</p>
+        <div class="blockchain-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Blockchain Protected
+        </div>
+      </div>
+      <form action="/verify-key" method="post">
+        <div class="form-group">
+          <label for="public-key">Your Qubic Public Key</label>
+          <textarea id="public-key" name="public-key" placeholder="Enter your Qubic public key" required></textarea>
+          <div class="unique-identifier">
+            <div class="identifier-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 4C12 4 16.5 7 16.5 12C16.5 17 12 20 12 20C12 20 7.5 17 7.5 12C7.5 7 12 4 12 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p>This is your unique identifier on the Blicket network</p>
+          </div>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="remember">
+          <label for="remember">Remember this device</label>
+        </div>
+
+        <button type="submit" class="btn">Login to Blicket</button>
+      </form>
+
+      <div class="encryption-notice">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Your public key is only used for verification and never shared with third parties
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

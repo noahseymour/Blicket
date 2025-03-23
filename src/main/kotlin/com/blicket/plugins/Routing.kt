@@ -1,33 +1,38 @@
 package com.blicket.plugins
 
-import com.blicket.db.Database
-import com.blicket.db.UnauthorisedUserException
-import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
-import io.ktor.server.auth.authenticate
+import io.ktor.server.http.content.static
 import io.ktor.server.http.content.staticResources
-import io.ktor.server.request.receiveParameters
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Application.configureRouting() {
     routing {
-        // Static public resources
-        staticResources("/public", "public")
-        staticResources("/protected", "protected")
+        staticResources("/templates", "templates")
+        staticResources("/styles", "styles")
+        staticResources("/scripts", "scripts")
 
-        // Root route
-        get("/") {
-            call.respondRedirect("/public/templates/index.html")
-        }
+        route("/") {
+            get {
+                call.respondRedirect("/templates/index.html")
+            }
 
-        // Sign-up route (outside authentication)
-        post("/sign-up") {
-            call.respondRedirect("public/templates/login.html")
-        }
+            get("messages") {
+                call.respondRedirect("/templates/messages.html")
+            }
 
-        post("/login") {
-            call.respondRedirect("/protected/templates/dashboard.html")
+            get("login") {
+                call.respondRedirect("/templates/login.html")
+            }
+
+            // RESTful API ENDPOINTS
+            post("new-message") {
+
+            }
+
+            post("get-messages") {
+
+            }
         }
     }
 }

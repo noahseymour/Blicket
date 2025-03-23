@@ -1,8 +1,5 @@
 package com.blicket
 
-import com.blicket.plugins.configureAuthentication
-import com.blicket.plugins.configureDatabases
-import com.blicket.plugins.configureHttpRedirect
 import com.blicket.plugins.configureRouting
 import com.blicket.plugins.configureSerialization
 import com.blicket.plugins.configureTemplating
@@ -16,9 +13,6 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
     configureTemplating()
-    configureAuthentication()
-    configureHttpRedirect()
     configureSerialization()
-    configureDatabases()
     configureRouting()
 }

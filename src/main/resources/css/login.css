@@ -79,11 +79,11 @@ nav ul li a:hover {
     font-weight: 500;
 }
 
-.auth-links a.login {
-    color: var(--coral-pink);
+.auth-links a.signup {
+    color: var(--dark);
 }
 
-.signup-container {
+.login-container {
     flex: 1;
     display: flex;
     align-items: center;
@@ -91,7 +91,7 @@ nav ul li a:hover {
     padding: 60px 0;
 }
 
-.signup-card {
+.login-card {
     background-color: white;
     border-radius: 16px;
     padding: 40px;
@@ -102,46 +102,46 @@ nav ul li a:hover {
     overflow: hidden;
 }
 
-.signup-card::before {
+.login-card::before {
     content: '';
     position: absolute;
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background-color: var(--pink-leaf);
-    opacity: 0.2;
+    background-color: var(--coral-pink);
+    opacity: 0.1;
     top: -100px;
     right: -100px;
     z-index: 0;
 }
 
-.signup-card::after {
+.login-card::after {
     content: '';
     position: absolute;
     width: 150px;
     height: 150px;
     border-radius: 50%;
     background-color: var(--sleuthe-yellow);
-    opacity: 0.2;
+    opacity: 0.1;
     bottom: -70px;
     left: -70px;
     z-index: 0;
 }
 
-.signup-header {
+.login-header {
     text-align: center;
     margin-bottom: 30px;
     position: relative;
     z-index: 1;
 }
 
-.signup-header h2 {
+.login-header h2 {
     font-size: 28px;
     color: var(--dark);
     margin-bottom: 10px;
 }
 
-.signup-header p {
+.login-header p {
     color: #666;
     font-size: 16px;
 }
@@ -166,9 +166,28 @@ nav ul li a:hover {
     border-radius: 8px;
     font-size: 16px;
     transition: all 0.3s;
+    font-family: monospace;
 }
 
 .form-group input:focus {
+    border-color: var(--coral-pink);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 94, 108, 0.2);
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 14px;
+    min-height: 100px;
+    resize: vertical;
+    font-family: monospace;
+    transition: all 0.3s;
+}
+
+.form-group textarea:focus {
     border-color: var(--coral-pink);
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 94, 108, 0.2);
@@ -193,11 +212,6 @@ nav ul li a:hover {
     font-size: 14px;
 }
 
-.checkbox-group a {
-    color: var(--coral-pink);
-    text-decoration: none;
-}
-
 .btn {
     display: block;
     width: 100%;
@@ -218,53 +232,164 @@ nav ul li a:hover {
     background-color: #ff4957;
 }
 
-.alternate-action {
-    text-align: center;
-    margin-top: 25px;
+.forgot-password {
+    text-align: right;
+    margin-top: -15px;
+    margin-bottom: 20px;
     font-size: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.forgot-password a {
     color: #666;
-    position: relative;
-    z-index: 1;
-}
-
-.alternate-action a {
-    color: var(--coral-pink);
     text-decoration: none;
-    font-weight: 500;
 }
 
-
-.key-security-info {
-    margin-top: 30px;
-    padding: 15px;
-    background-color: #f8f8f8;
-    border-radius: 8px;
-    position: relative;
-    z-index: 1;
+.forgot-password a:hover {
+    color: var(--coral-pink);
 }
 
-.key-security-info h4 {
-    font-size: 16px;
-    color: var(--dark);
-    margin-bottom: 10px;
+.divider {
     display: flex;
     align-items: center;
+    margin: 30px 0;
+    position: relative;
+    z-index: 1;
 }
 
-.key-security-info h4 svg {
-    margin-right: 8px;
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #eee;
 }
 
-.key-security-info p {
+.divider span {
+    padding: 0 15px;
+    color: #888;
     font-size: 14px;
-    color: #666;
-    line-height: 1.5;
 }
 
-footer {
-    background-color: var(--dark);
-    color: white;
-    padding: 20px 0;
+.alternate-login {
     text-align: center;
-    margin-top: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.qr-option {
+    background-color: var(--light);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.qr-placeholder {
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    border-radius: 8px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #ccc;
+}
+
+.unique-identifier {
+    display: flex;
+    align-items: center;
+    background-color: var(--light);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+.unique-identifier .identifier-icon {
+    margin-right: 10px;
+    color: var(--coral-pink);
+}
+
+.unique-identifier p {
+    font-size: 14px;
+    color: var(--dark);
+    margin: 0;
+    flex: 1;
+}
+
+.info-text {
+    font-size: 13px;
+    color: #666;
+    text-align: center;
+    margin-top: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+.key-helper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+.key-helper a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: var(--light);
+    color: var(--coral-pink);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.key-helper a:hover {
+    background-color: var(--coral-pink);
+    color: white;
+}
+
+.blockchain-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--light);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    color: var(--dark);
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.blockchain-badge svg {
+    margin-right: 5px;
+}
+
+.encryption-notice {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.encryption-notice svg {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .login-card {
+        padding: 30px;
+    }
 }
