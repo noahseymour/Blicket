@@ -5,7 +5,7 @@ import kotlinx.serialization.json.Json
 import org.bson.codecs.pojo.annotations.BsonId
 
 @Serializable
-data class Message (
+open class Message (
     val receiver: Address,
     val sender: Address,
     val timestamp: Time,
@@ -14,5 +14,5 @@ data class Message (
     val identifier: String,
     val amount: Currency
 ) {
-    fun toJSONString(): String = Json.encodeToString(this)
+    open fun toJSONString(): String = Json.encodeToString(this)
 }
