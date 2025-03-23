@@ -1,0 +1,2 @@
+/Users/namanmalhotra/IdeaProjects/Blicket/src/CMakeFiles/edit_cache.dir
+/Users/namanmalhotra/IdeaProjects/Blicket/src/CMakeFiles/rebuild_cache.dir
