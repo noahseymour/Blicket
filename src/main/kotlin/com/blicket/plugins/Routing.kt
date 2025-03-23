@@ -41,11 +41,11 @@ fun Application.configureRouting() {
             }
 
             post("new-message") {
-
+                // take messages and store them
             }
 
             post("get-messages") {
-
+                // send out serialised data class
             }
         }
     }
