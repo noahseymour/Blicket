@@ -29,8 +29,6 @@ class TransactionPost(
             0,
             FourQCrypto.encrypt(message.toByteArray(), FourQPublicKey(recipient))
         )
-        println(transaction)
-
         return transaction.toBytes()
     }
 }
