@@ -1,4 +1,3 @@
-
 :root {
     --ragin-beige: #fff5d7;
     --coral-pink: #ff5e6c;
@@ -26,8 +25,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -75,17 +73,6 @@ nav ul li a:hover {
     color: var(--coral-pink);
 }
 
-.auth-links a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: var(--dark);
-    font-weight: 500;
-}
-
-.auth-links a.login {
-    color: var(--coral-pink);
-}
-
 .messaging-container {
     display: flex;
     flex: 1;
@@ -108,24 +95,6 @@ nav ul li a:hover {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-.user-profile {
-    display: flex;
-    align-items: center;
-}
-
-.user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--sleuthe-yellow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-    color: var(--dark);
-    font-weight: bold;
 }
 
 .sidebar-actions {
@@ -278,9 +247,20 @@ nav ul li a:hover {
     margin-bottom: 3px;
 }
 
-.chat-contact-status {
-    font-size: 12px;
-    color: #666;
+.empty-chat-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #888;
+    text-align: center;
+    padding: 20px;
+}
+
+.empty-chat-state p {
+    font-size: 16px;
+    margin-top: 10px;
 }
 
 .messages {
@@ -328,11 +308,11 @@ nav ul li a:hover {
     display: inline-block;
 }
 
-.sent .message-time {
+.sent + .message-time {
     align-self: flex-end;
 }
 
-.received .message-time {
+.received + .message-time {
     align-self: flex-start;
 }
 
@@ -413,6 +393,115 @@ nav ul li a:hover {
     border-radius: 12px;
     margin-top: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Payment Dialog Styles */
+.payment-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.payment-dialog {
+    background-color: white;
+    border-radius: 12px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.payment-dialog-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-dialog-header h3 {
+    margin: 0;
+    color: var(--dark);
+}
+
+.payment-dialog-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+.payment-dialog-content {
+    padding: 20px;
+}
+
+.payment-input-group {
+    margin-bottom: 15px;
+}
+
+.payment-input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.payment-input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.payment-details {
+    background-color: var(--light);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.payment-details p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.payment-dialog-actions {
+    padding: 15px 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.payment-dialog-actions button {
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.payment-cancel {
+    background-color: transparent;
+    color: var(--dark);
+}
+
+.payment-send {
+    background-color: var(--coral-pink);
+    color: white;
+}
+
+.payment-send:hover {
+    background-color: #ff4957;
 }
 
 /* For responsive design */
