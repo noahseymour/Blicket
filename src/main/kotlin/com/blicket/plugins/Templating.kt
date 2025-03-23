@@ -14,8 +14,4 @@ fun Application.configureTemplating() {
             characterEncoding = "utf-8"
         })
     }
-
-    routing {
-
-    }
 }
