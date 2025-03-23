@@ -23,7 +23,7 @@ fun Application.configureTemplating() {
 
     routing {
 
-        post("/login") {
+        post("/verify-key") {
             val parameters = call.receiveParameters()
             val publicKey = parameters["public-key"] ?: ""
             val privateKey = parameters["private-key"] ?: ""

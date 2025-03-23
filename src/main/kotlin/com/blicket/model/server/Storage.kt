@@ -13,7 +13,7 @@ object Storage {
     private val users: MutableMap<publicKey, Pair<privateKey, name>> = mutableMapOf()
 
     fun addUser(publicKey: publicKey, privateKey: privateKey, name: name) {
-        if (users[publicKey]?.first != privateKey) {
+        if (users[publicKey]?.first == privateKey) {
             throw InvalidKeyException()
         }
 
