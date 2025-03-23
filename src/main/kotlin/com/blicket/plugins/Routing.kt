@@ -7,6 +7,9 @@ import io.ktor.server.request.receiveParameters
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
+
+
+
 fun Application.configureRouting() {
     routing {
         staticResources("/templates", "templates")
