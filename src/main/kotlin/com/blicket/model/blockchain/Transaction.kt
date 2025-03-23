@@ -4,13 +4,15 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
 
-class Transaction(private val transactionObject: JsonElement) {
+class Transaction(
+    private val transactionObject: JsonElement,
+) {
     private val timestamp: String
     private val sender: String
     private val recipient: String
     private val message: String
     private val transactionID: String
-    private val paymentAmount: Currency
+    private val paymentAmount: String
 
     init {
         val transactionInfo = { key: String ->
@@ -21,7 +23,7 @@ class Transaction(private val transactionObject: JsonElement) {
         recipient = transactionInfo("destId")
         message = transactionInfo("inputHex")
         transactionID = transactionInfo("txId")
-        paymentAmount = 0
+        paymentAmount = transactionInfo("amount")
     }
 
     operator fun component1() = timestamp
@@ -31,4 +33,6 @@ class Transaction(private val transactionObject: JsonElement) {
     operator fun component3() = message
 
     operator fun component4() = transactionID
+
+    operator fun component5() = paymentAmount
 }

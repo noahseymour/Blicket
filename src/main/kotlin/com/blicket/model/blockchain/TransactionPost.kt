@@ -1,12 +1,8 @@
 package com.blicket.model.blockchain
 
-import at.qubic.api.domain.MessageType
-import at.qubic.api.domain.QubicHeader
-import at.qubic.api.domain.QubicMessage
 import at.qubic.api.domain.std.SignedTransaction
 import at.qubic.api.service.TransactionService
 import io.ktor.http.HttpStatusCode
-import java.security.SecureRandom
 import kotlin.random.Random
 
 class TransactionPost(

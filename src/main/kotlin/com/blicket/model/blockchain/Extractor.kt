@@ -33,7 +33,7 @@ class Extractor(
     private fun extractMessages(tick: Tick): List<Message> {
         val messages: MutableList<Message> = mutableListOf()
         for (transaction in tick) {
-            val (timestamp, sender, message, transactionID) = Transaction(transaction)
+            val (timestamp, sender, message, transactionID, paymentAmount) = Transaction(transaction)
             val decryptedMessage = FourQCrypto.decrypt(message.toByteArray(), FourQPrivateKey(privateKey))
             /**
              * Transaction objects are input from the blockchain (tick-chain)
@@ -46,7 +46,8 @@ class Extractor(
                 sender = sender,
                 timestamp = timestamp,
                 text = decryptedMessage.toString(),
-                identifier = transactionID
+                identifier = transactionID,
+                amount = paymentAmount.toLong()
             ))
         }
         return messages.toList()

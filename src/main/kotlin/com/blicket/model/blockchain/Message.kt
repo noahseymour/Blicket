@@ -12,6 +12,7 @@ data class Message (
     val text: String,
     @BsonId
     val identifier: String,
+    val amount: Currency
 ) {
     fun toJSONString(): String = Json.encodeToString(this)
 }
