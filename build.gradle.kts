@@ -26,6 +26,9 @@ application {
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs("lib")
+    }
 }
 
 dependencies {

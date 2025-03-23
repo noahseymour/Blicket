@@ -10,13 +10,13 @@ class WorkflowTest {
         val receiverPair = RSA.generateKeyPair()
 
         val senderTransaction = Transaction(
-            sender = senderPair.public.toString(),     //TODO maybe problems with toString()
-            recipient = receiverPair.public.toString(),
+            sender = senderPair.second.toString(Charsets.UTF_8),     //TODO maybe problems with toString()
+            recipient = receiverPair.second.toString(Charsets.UTF_8),
             "Hello World"
         )
         val receiverExtractor = Extractor(
-            receiverAddress = receiverPair.public.toString(),
-            privateKey = receiverPair.private.toString()
+            receiverAddress = receiverPair.second.toString(),
+            privateKey = receiverPair.first.toString()
         )
 
         runBlocking {

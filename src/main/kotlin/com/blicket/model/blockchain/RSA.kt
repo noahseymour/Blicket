@@ -12,6 +12,7 @@ import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 import java.util.Base64
 import javax.crypto.Cipher
+import at.qubic.api.crypto.IdentityUtil
 
 
 class RSA {
@@ -61,10 +62,14 @@ class RSA {
             return keyFactory.generatePublic(keySpec)
         }
 
-        fun generateKeyPair(keySize: Int = 2048): KeyPair {
-            val keyPairGenerator = KeyPairGenerator.getInstance(RSA_ALGORITHM, PROVIDER)
-            keyPairGenerator.initialize(keySize, SecureRandom())
-            return keyPairGenerator.generateKeyPair()
+        fun generateKeyPair(keySize: Int = 480): Pair<ByteArray, ByteArray> {
+//            val keyPairGenerator = KeyPairGenerator.getInstance(RSA_ALGORITHM, PROVIDER)
+//            keyPairGenerator.initialize(keySize, SecureRandom())
+//            return keyPairGenerator.generateKeyPair()
+            val identityUtil: IdentityUtil = IdentityUtil();
+            val privateKey = identityUtil.getPrivateKeyFromSubSeed(identityUtil.getSubSeedFromSeed("wqbdupxgcaimwdsnchitjmsplzclkqokhadgehdxqogeeiovzvadstt"))
+            val publicKey = identityUtil.getPublicKeyFromPrivateKey(privateKey)
+            return (privateKey to publicKey)
         }
     }
 }
