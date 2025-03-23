@@ -12,12 +12,6 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 
-object FourQParams {
-    const val KEY_SIZE_BYTES = 32
-    const val POINT_SIZE_BYTES = 32
-    val CURVE_ORDER = "73EDA753299D7D483339D80809A1D80553BDA402FFFE5BFEFFFFFFFF00000001".toBigInteger(16)
-}
-
 class FourQPrivateKey(val key: ByteArray) {
     init {
         require(key.size == FourQParams.KEY_SIZE_BYTES) { "Private key must be ${FourQParams.KEY_SIZE_BYTES} bytes" }
@@ -30,6 +24,11 @@ class FourQPublicKey(val point: ByteArray) {
     }
 }
 
+object FourQParams {
+    const val KEY_SIZE_BYTES = 32
+    const val POINT_SIZE_BYTES = 32
+    val CURVE_ORDER = "73EDA753299D7D483339D80809A1D80553BDA402FFFE5BFEFFFFFFFF00000001".toBigInteger(16)
+}
 
 object FourQCrypto {
     private val secureRandom = SecureRandom()

@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Toggle visibility of private key with eye icon
     const toggleButton = document.getElementById('toggle-visibility');
     const privateKeyField = document.getElementById('private-key');
     const eyeIcon = toggleButton.querySelector('.eye-icon');

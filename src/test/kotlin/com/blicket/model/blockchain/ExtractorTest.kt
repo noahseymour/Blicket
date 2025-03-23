@@ -2,15 +2,14 @@ package com.blicket.model.blockchain
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import org.junit.jupiter.api.assertNotNull
 
-/*
+@Deprecated("Deprecated test")
 class ExtractorTest {
     @Test
     fun extractLatestNode() {
-        val extractorTest: Extractor = Extractor(
+        val extractorTest = Extractor(
             receiverAddress = testRecipient,
-            privateKey =
+            privateKey = testSender.toByteArray()
         )
 
         runBlocking {
@@ -25,4 +24,4 @@ class ExtractorTest {
             println(latestTick())
         }
     }
-}*/
+}

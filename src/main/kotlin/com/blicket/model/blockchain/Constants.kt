@@ -14,5 +14,5 @@ const val RANDOM_SEED_LENGTH = 64
 const val TICK_OFFSET = 1
 
 fun getSeed(): String {
-    return "wqbdupxgcaimwdsnchitjmsplzclkqokhadgehdxqogeeiovzvadstt";
+    return "wqbdupxgcaimwdsnchitjmsplzclkqokhadgehdxqogeeiovzvadstt"
 }

@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM Elements
     const conversationsList = document.getElementById('conversations-list');
     const messagesContainer = document.getElementById('messages-container');
     const emptyState = document.getElementById('empty-state');
@@ -9,12 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const messageInputContainer = document.getElementById('message-input-container');
     const paymentAction = document.getElementById('payment-action');
 
-    // State variables
     let userData = null;
     let activeChat = null;
     let messagePollingInterval = null;
 
-    // Color mapping for avatar backgrounds
     const colors = {
         'A': 'var(--pink-leaf)',
         'B': 'var(--sleuthe-yellow)',
@@ -44,33 +41,21 @@ document.addEventListener('DOMContentLoaded', function() {
         'Z': '#fae3d9'
     };
 
-    // Initialize the messenger app
     initMessenger();
 
-    /**
-     * Initialize the messenger application
-     */
     function initMessenger() {
-        // Fetch initial data
         fetchMessages();
 
-        // Setup event listeners
         setupEventListeners();
 
-        // Start polling for new messages
         startMessagePolling();
     }
 
-    /**
-     * Setup event listeners for UI interactions
-     */
     function setupEventListeners() {
-        // Send message when button is clicked
         if (sendButton) {
             sendButton.addEventListener('click', sendMessage);
         }
 
-        // Send message when Enter key is pressed in the input field
         if (messageInput) {
             messageInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter' && !e.shiftKey) {
@@ -80,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Handle payment button click
         if (paymentAction) {
             paymentAction.addEventListener('click', function() {
                 if (activeChat) {
@@ -89,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Handle URL changes
         window.addEventListener('popstate', function(event) {
             if (event.state && event.state.contact) {
                 switchChat(event.state.contact);
@@ -97,9 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    /**
-     * Fetch messages from the API
-     */
     function fetchMessages() {
         fetch(API_ENDPOINTS.getMessages)
             .then(response => {
@@ -624,9 +604,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return colors[firstLetter] || 'var(--pink-leaf)';
     }
 
-    /**
-     * Format time from API format to display format
-     */
     function formatTime(timeString) {
         if (!timeString) return '';
 
@@ -658,14 +635,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 return timeString.split(' ')[0];
             }
         } catch (e) {
-            // If parsing fails, return the original string
             return timeString;
         }
     }
 
-    /**
-     * Format current time in API format
-     */
     function formatCurrentTime() {
         const now = new Date();
         const year = now.getFullYear().toString().substr(-2);
@@ -677,7 +650,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${year}-${month}-${day} ${hours}:${minutes}`;
     }
 
-    // Clean up when navigating away
     window.addEventListener('beforeunload', function() {
         if (messagePollingInterval) {
             clearInterval(messagePollingInterval);
