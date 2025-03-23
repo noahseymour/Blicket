@@ -8,3 +8,10 @@ ktor:
         watch:
             - classes
             - resources
+        sslPort: 8443
+    security:
+        ssl:
+            keyStore: keystore.jks
+            keyAlias: sampleAlias
+            keyStorePassword: password
+            privateKeyPassword: password
