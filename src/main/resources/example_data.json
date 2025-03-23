@@ -1,0 +1,39 @@
+{
+  "Name": "Noah",
+  "Chats": [
+    {
+      "Contact": "James",
+      "Messages": [
+        {
+          "From": "Noah",
+          "To": "James",
+          "Content": "Hello James",
+          "Time": "23-03-25 03:09"
+        },
+        {
+          "From": "James",
+          "To": "Noah",
+          "Content": "Hello Noah",
+          "Time": "23-03-25 03:15"
+        }
+      ]
+    },
+    {
+      "Contact": "Naman",
+      "Messages": [
+        {
+          "From": "Naman",
+          "To": "Noah",
+          "Content": "Wassup",
+          "Time": "23-03-25 03:30"
+        },
+        {
+          "From": "Noah",
+          "To": "Naman",
+          "Content": "Nothing much. So locked in rn",
+          "TIme": "23-03-25 03:45"
+        }
+      ]
+    }
+  ]
+}

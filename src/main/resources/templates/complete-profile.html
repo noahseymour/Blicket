@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blicket - Complete Your Profile</title>
+    <script src="../scripts/setup.js"></script>
+    <link rel="stylesheet" href="../css/setup.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <a href="index.html" class="logo">B<span>licket</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="#">Security</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="profile-container">
+        <div class="profile-card">
+            <div class="verification-status">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p>Qubic Public Key verified successfully</p>
+            </div>
+
+            <div class="profile-header">
+                <h2>Complete Your Profile</h2>
+                <p>Let others know how to find you on Blicket</p>
+            </div>
+
+            <div class="avatar-section">
+                <div class="avatar-circle">?</div>
+                <div class="avatar-info">
+                    <span class="avatar-label">Your profile avatar will be generated</span>
+                    <span class="avatar-label">based on your display name</span>
+                </div>
+            </div>
+
+            <form action="/complete-profile" method="post">
+                <!-- Hidden fields that will be filled with server-side data -->
+                <input type="hidden" name="publicKey" th:value="${publicKey}" />
+                <input type="hidden" name="privateKey" th:value="${privateKey}" />
+
+                <div class="form-group">
+                    <label for="display-name">Display Name</label>
+                    <input type="text" id="display-name" name="name" placeholder="How you want to be known on Blicket" required>
+                    <p class="helper-text">This will be visible to your contacts and cannot be a blank value</p>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="discoverable" name="discoverable" checked>
+                    <label for="discoverable">Make my profile discoverable so others can find me by my display name (your public key will remain private)</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to Blicket's Terms of Service and Privacy Policy regarding how my information is used and stored on the blockchain</label>
+                </div>
+
+                <button type="submit" class="btn">Complete Setup</button>
+                <button type="button" class="btn btn-outline">Skip for Now</button>
+            </form>
+
+            <div class="privacy-info">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                You can change your display name settings at any time in your profile
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

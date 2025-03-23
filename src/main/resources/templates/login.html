@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blicket - Public Key Login</title>
   <link rel="stylesheet" href="../css/login.css">
+  <script src="../scripts/login.js"></script>
 </head>
 <body>
 <div class="container">
@@ -18,16 +19,13 @@
         <li><a href="#">Support</a></li>
       </ul>
     </nav>
-    <div class="auth-links">
-      <a href="sign-up.html" class="signup">Sign Up</a>
-    </div>
   </header>
 
   <section class="login-container">
     <div class="login-card">
       <div class="login-header">
         <h2>Access Your Account</h2>
-        <p>Login with your Qubic public key</p>
+        <p>Login with your Qubic keys</p>
         <div class="blockchain-badge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -47,6 +45,27 @@
               </svg>
             </div>
             <p>This is your unique identifier on the Blicket network</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="private-key">Your Qubic Private Key</label>
+          <div class="password-field">
+            <textarea id="private-key" name="private-key" placeholder="Enter your Qubic private key" required class="hidden-text"></textarea>
+            <button type="button" id="toggle-visibility" class="visibility-toggle" aria-label="Toggle visibility">
+              <svg class="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 5C7.63636 5 4 8.5 2 12C4 15.5 7.63636 19 12 19C16.3636 19 20 15.5 22 12C20 8.5 16.3636 5 12 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="security-warning">
+            <div class="warning-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 9V13M12 17H12.01M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p>Keep this secure. Never share your private key with anyone</p>
           </div>
         </div>
 
